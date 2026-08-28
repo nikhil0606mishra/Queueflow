@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Your queue status — QueueFlow</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="nav">
+    <div class="nav-brand"><span class="logo-badge">⚡</span>QueueFlow</div>
+  </div>
+
+  <div class="wrap">
+    <div class="error-banner" id="error-banner"></div>
+
+    <div id="content" style="display:none;">
+      <div class="card">
+        <div class="queue-card-head">
+          <div>
+            <div class="restaurant-label" id="restaurant-name">—</div>
+            <h2>Today's queue</h2>
+          </div>
+          <span class="status-pill dot" id="status-pill">Waiting</span>
+        </div>
+        <hr class="divider" />
+        <div class="serve-row">
+          <div class="serve-block">
+            <div class="serve-label">Currently serving</div>
+            <div class="serve-number" id="serving-number">#0</div>
+          </div>
+          <div class="serve-block next">
+            <div class="serve-label">Your token</div>
+            <div class="serve-number mine" id="mine-number">#0</div>
+          </div>
+        </div>
+        <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%;"></div></div>
+        <div class="meta-row">
+          <span class="meta-item">👥 <span id="ahead-value">—</span> people ahead</span>
+          <span class="meta-item">🕐 ~<span id="wait-value">—</span> min wait</span>
+        </div>
+        <div class="meta-row" style="margin-top:10px;">
+          <span>Counter service</span>
+          <span class="live-tag"><span class="live-dot"></span>Updating live</span>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:18px;">
+        <button class="ghost" id="resend-btn">Resend my status by WhatsApp/email</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">QueueFlow — skip the standing, keep the seat.</footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/status.js"></script>
+</body>
+</html>

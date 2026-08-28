@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin — QueueFlow</title>
+<link rel="stylesheet" href="css/style.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="nav">
+    <div class="nav-brand"><span class="logo-badge">⚡</span>QueueFlow</div>
+    <div class="nav-links"><a href="index.html" class="muted-link">← Home</a></div>
+  </div>
+
+  <div class="wrap">
+    <div class="eyebrow"><span class="dot"></span>Counter dashboard</div>
+    <h1>Run the queue</h1>
+    <p class="lede">Set up your restaurant once, print the QR code for your tables/counter, then advance the queue as you serve each order.</p>
+
+    <div class="error-banner" id="error-banner"></div>
+
+    <div class="card setup-card" id="setup-card">
+      <div class="field">
+        <label for="restaurant-name-input">Restaurant name</label>
+        <input type="text" id="restaurant-name-input" placeholder="e.g. Sunrise Diner" />
+      </div>
+      <button class="primary" id="create-restaurant-btn">Create restaurant &amp; get QR code</button>
+    </div>
+
+    <div id="dashboard" style="display:none;">
+      <div class="card setup-card">
+        <div class="kv"><span class="k">Restaurant</span><span class="v" id="dash-name">—</span></div>
+        <div class="kv"><span class="k">Restaurant ID</span><span class="v" id="dash-id">—</span></div>
+        <div class="kv"><span class="k">Admin key (keep secret)</span><span class="v" id="dash-key">—</span></div>
+        <div class="kv"><span class="k">Registration link</span><span class="v" id="dash-link">—</span></div>
+        <div style="margin-top:14px;" id="qr-holder"></div>
+        <button class="ghost" id="forget-btn" style="margin-top:10px;">Use a different restaurant</button>
+      </div>
+
+      <div class="card">
+        <div class="serve-row">
+          <div class="serve-block">
+            <div class="serve-label">Now serving</div>
+            <div class="serve-number" id="serving-number">#0</div>
+          </div>
+          <button class="primary" id="advance-btn" style="max-width:240px;">Advance to next order →</button>
+        </div>
+      </div>
+
+      <h1 style="font-size:1.15rem; margin-top:32px;">Waiting queue</h1>
+      <div class="card" style="padding:8px 20px;">
+        <table class="queue-table">
+          <thead>
+            <tr><th>#</th><th>Name</th><th>Contact</th><th>Status</th><th>Actions</th></tr>
+          </thead>
+          <tbody id="queue-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <footer class="foot">QueueFlow — skip the standing, keep the seat.</footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
