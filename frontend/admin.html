@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Admin — QueueFlow</title>
+<link rel="stylesheet" href="css/style.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Counter dashboard</p>
+    <h1>Run the queue</h1>
+    <p class="lede">Set up your restaurant once, print the QR code for your tables/counter, then advance the queue as you serve each order.</p>
+
+    <div class="error-banner" id="error-banner"></div>
+
+    <!-- Setup: create a restaurant, or it's loaded from localStorage -->
+    <div class="setup-card" id="setup-card">
+      <div class="field">
+        <label for="restaurant-name-input">Restaurant name</label>
+        <input type="text" id="restaurant-name-input" placeholder="e.g. Sunrise Diner" />
+      </div>
+      <button class="primary" id="create-restaurant-btn">Create restaurant &amp; get QR code</button>
+    </div>
+
+    <div id="dashboard" style="display:none;">
+      <div class="setup-card">
+        <div class="kv"><span class="k">Restaurant</span><span class="v" id="dash-name">—</span></div>
+        <div class="kv"><span class="k">Restaurant ID</span><span class="v" id="dash-id">—</span></div>
+        <div class="kv"><span class="k">Admin key (keep secret)</span><span class="v" id="dash-key">—</span></div>
+        <div class="kv"><span class="k">Registration link</span><span class="v" id="dash-link">—</span></div>
+        <div style="margin-top:14px;" id="qr-holder"></div>
+        <button class="secondary" id="forget-btn" style="margin-top:14px;">Use a different restaurant</button>
+      </div>
+
+      <div class="board">
+        <div class="board-row">
+          <div class="board-block">
+            <div class="board-label">Now serving</div>
+            <div class="flap-group" id="serving-flaps"></div>
+          </div>
+          <button class="primary" id="advance-btn" style="max-width:220px;">Advance to next order</button>
+        </div>
+      </div>
+
+      <h1 style="font-size:1.1rem;">Waiting queue</h1>
+      <table class="queue-table">
+        <thead>
+          <tr><th>#</th><th>Name</th><th>Contact</th><th>Status</th><th>Actions</th></tr>
+        </thead>
+        <tbody id="queue-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer class="foot">QueueFlow — skip the standing, keep the seat.</footer>
+
+  <script src="js/api.js"></script>
+  <script src="js/flap.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

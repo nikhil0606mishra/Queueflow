@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Join the queue — QueueFlow</title>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Take a token</p>
+    <h1 id="restaurant-heading">Join the queue</h1>
+    <p class="lede">Enter your details and we'll text or email you the moment your order is close — no need to keep watching the counter.</p>
+
+    <div class="error-banner" id="error-banner"></div>
+
+    <form id="register-form">
+      <div class="field">
+        <label for="name">Your name</label>
+        <input type="text" id="name" name="name" placeholder="e.g. Aditi Rao" required />
+      </div>
+      <div class="field">
+        <label for="phone">WhatsApp number</label>
+        <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" />
+        <div class="hint">Include the country code. Optional if you provide an email below.</div>
+      </div>
+      <div class="field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" />
+        <div class="hint">Optional if you provided a WhatsApp number above.</div>
+      </div>
+      <button type="submit" class="primary" id="submit-btn">Get my token</button>
+    </form>
+  </div>
+
+  <footer class="foot">QueueFlow — skip the standing, keep the seat.</footer>
+
+  <script src="js/api.js"></script>
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const restaurantId = params.get('restaurantId');
+    const errorBanner = document.getElementById('error-banner');
+
+    function showError(message) {
+      errorBanner.textContent = message;
+      errorBanner.classList.add('show');
+    }
+
+    if (!restaurantId) {
+      showError('This link is missing a restaurant ID. Ask the counter for a fresh QR code.');
+      document.getElementById('register-form').style.display = 'none';
+    }
+
+    document.getElementById('register-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      errorBanner.classList.remove('show');
+
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const submitBtn = document.getElementById('submit-btn');
+
+      if (!phone && !email) {
+        showError('Please provide a WhatsApp number, an email, or both.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Getting your token…';
+
+      try {
+        const entry = await apiRequest('/api/register', {
+          method: 'POST',
+          body: { restaurantId, name, phone: phone || undefined, email: email || undefined },
+        });
+        window.location.href = `status.html?token=${encodeURIComponent(entry.token)}`;
+      } catch (err) {
+        showError(err.message);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Get my token';
+      }
+    });
+  </script>
+</body>
+</html>

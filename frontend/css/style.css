@@ -1,0 +1,403 @@
+/* ============================================================
+   QueueFlow — design tokens
+   Signature element: a mechanical split-flap "departure board"
+   digit, the same object language as the token counters and
+   order-number boards used at real counter-service restaurants.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Manrope:wght@400;500;700;800&display=swap');
+
+:root {
+  /* Color */
+  --ink: #14161b;        /* background */
+  --ink-raised: #1c1f26; /* cards on dark bg */
+  --paper: #ede9e1;      /* light surfaces */
+  --flap-face: #f6f4ef;  /* split-flap card face */
+  --ember: #e8823c;      /* "almost up" accent */
+  --signal: #3fa672;     /* on-track / served accent */
+  --steel: #8a92a2;      /* muted secondary text */
+  --line: rgba(255, 255, 255, 0.08);
+
+  /* Type */
+  --font-display: 'Space Mono', 'Courier New', monospace;
+  --font-body: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  --flap-w: 44px;
+  --flap-h: 66px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-body);
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+a { color: inherit; }
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 32px 20px 64px;
+  width: 100%;
+  flex: 1;
+}
+
+.eyebrow {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.72rem;
+  color: var(--steel);
+  margin: 0 0 6px;
+}
+
+h1 {
+  font-family: var(--font-body);
+  font-weight: 800;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  letter-spacing: -0.02em;
+  margin: 0 0 4px;
+}
+
+p.lede {
+  color: var(--steel);
+  margin: 0 0 28px;
+  font-size: 0.98rem;
+}
+
+/* ---- Form elements ---- */
+
+.field {
+  margin-bottom: 16px;
+}
+
+.field label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--steel);
+  margin-bottom: 6px;
+}
+
+.field input {
+  width: 100%;
+  background: var(--ink-raised);
+  border: 1px solid var(--line);
+  color: var(--paper);
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+.field input:focus {
+  outline: 2px solid var(--ember);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.field .hint {
+  font-size: 0.8rem;
+  color: var(--steel);
+  margin-top: 6px;
+}
+
+button.primary {
+  width: 100%;
+  background: var(--ember);
+  color: #1a0f06;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 18px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.12s ease, filter 0.12s ease;
+}
+
+button.primary:hover { filter: brightness(1.08); }
+button.primary:active { transform: scale(0.98); }
+button.primary:focus-visible { outline: 2px solid var(--paper); outline-offset: 2px; }
+
+button.secondary {
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px 16px;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+}
+
+button.secondary:hover { border-color: var(--steel); }
+
+.error-banner {
+  background: rgba(232, 90, 60, 0.14);
+  border: 1px solid rgba(232, 90, 60, 0.4);
+  color: #ffb69a;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  margin-bottom: 18px;
+  display: none;
+}
+.error-banner.show { display: block; }
+
+/* ---- Split-flap board (signature element) ---- */
+
+.board {
+  background: var(--ink-raised);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 28px 24px;
+  margin-bottom: 20px;
+}
+
+.board-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.board-block { text-align: center; }
+
+.board-block .board-label {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.7rem;
+  color: var(--steel);
+  margin-bottom: 10px;
+}
+
+.board-divider {
+  width: 1px;
+  align-self: stretch;
+  background: var(--line);
+}
+
+.flap-group {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.flap {
+  position: relative;
+  width: var(--flap-w);
+  height: var(--flap-h);
+  border-radius: 6px;
+  background: var(--flap-face);
+  box-shadow: 0 2px 0 rgba(0,0,0,0.25);
+  perspective: 240px;
+}
+
+.flap::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; top: calc(50% - 1px);
+  height: 2px;
+  background: rgba(0,0,0,0.22);
+  z-index: 3;
+}
+
+.flap-face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(var(--flap-h) * 0.52);
+  color: var(--ink);
+}
+
+.flap-leaf {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 50%;
+  overflow: hidden;
+  background: var(--flap-face);
+  border-radius: 6px 6px 0 0;
+  transform-origin: bottom;
+  z-index: 2;
+  transform: rotateX(0deg);
+}
+
+.flap-leaf.flipping {
+  animation: flapDown 320ms cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+.flap-leaf-inner {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: var(--flap-h);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(var(--flap-h) * 0.52);
+  color: var(--ink);
+}
+
+@keyframes flapDown {
+  0%   { transform: rotateX(0deg); }
+  100% { transform: rotateX(-92deg); }
+}
+
+.board-number {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+/* ---- Status pill / meta ---- */
+
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(63, 166, 114, 0.15);
+  color: var(--signal);
+  margin-bottom: 18px;
+}
+.status-pill.dot::before {
+  content: "";
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.status-pill.warn { background: rgba(232, 130, 60, 0.16); color: var(--ember); }
+
+.meta-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.meta-card {
+  background: var(--ink-raised);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.meta-card .meta-label {
+  font-family: var(--font-display);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--steel);
+  margin-bottom: 6px;
+}
+
+.meta-card .meta-value {
+  font-size: 1.4rem;
+  font-weight: 700;
+}
+
+footer.foot {
+  text-align: center;
+  color: var(--steel);
+  font-size: 0.8rem;
+  padding: 20px;
+}
+
+/* ---- Admin table ---- */
+
+table.queue-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+table.queue-table th, table.queue-table td {
+  text-align: left;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+}
+
+table.queue-table th {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--steel);
+}
+
+.tag {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-family: var(--font-display);
+  text-transform: uppercase;
+}
+.tag.waiting { background: rgba(138,146,162,0.18); color: var(--steel); }
+.tag.almost_up { background: rgba(232,130,60,0.18); color: var(--ember); }
+.tag.called { background: rgba(63,166,114,0.18); color: var(--signal); }
+
+.row-actions button {
+  margin-right: 6px;
+  padding: 5px 9px;
+  font-size: 0.72rem;
+}
+
+.setup-card {
+  background: var(--ink-raised);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 20px;
+}
+
+.kv {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  padding: 6px 0;
+  border-bottom: 1px dashed var(--line);
+}
+.kv:last-child { border-bottom: none; }
+.kv .k { color: var(--steel); }
+.kv .v { word-break: break-all; text-align: right; }
+
+@media (prefers-reduced-motion: reduce) {
+  .flap-leaf.flipping { animation: none; transform: rotateX(-92deg); }
+  button.primary:active { transform: none; }
+}
+
+@media (max-width: 420px) {
+  :root { --flap-w: 34px; --flap-h: 52px; }
+  .meta-grid { grid-template-columns: 1fr; }
+}
