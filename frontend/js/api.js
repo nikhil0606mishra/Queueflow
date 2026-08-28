@@ -3,7 +3,7 @@
  * dev; change it (or set window.QUEUEFLOW_API_BASE before this script
  * loads) once you deploy the backend somewhere public.
  */
-const API_BASE = window.QUEUEFLOW_API_BASE || 'http://localhost:4000';
+const API_BASE = window.QUEUEFLOW_API_BASE || 'https://queueflow-91md.onrender.com';
 
 async function apiRequest(path, { method = 'GET', body, adminKey } = {}) {
   const headers = { 'Content-Type': 'application/json' };
